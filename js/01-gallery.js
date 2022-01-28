@@ -1,13 +1,8 @@
 import { galleryItems } from "./gallery-items.js";
 
-// Change code below this line
-
-// console.log(galleryItems);
 const galeryContainerEl = document.querySelector(".gallery");
 
 const makeGalery = makeGaleryList(galleryItems);
-galeryContainerEl.insertAdjacentHTML("beforeend", makeGalery);
-// galeryContainerEl.addEventListener("click", onGaleryItemClick);
 
 function makeGaleryList(array) {
   return array
@@ -28,10 +23,19 @@ function makeGaleryList(array) {
     .join("");
 }
 
-// function onGaleryItemClick(event) {
-//   event.preventDefault();
-//   const instance = basicLightbox.create(`
-//       <img src="assets/images/image.png" width="800" height="600">
-//   `);
-//   instance.show();
-// }
+function onGaleryItemClick(event) {
+  event.preventDefault();
+  const instance = basicLightbox.create(`
+      <img src=${event.target.dataset.source} width="800" height="600">
+  `);
+
+  instance.show();
+  galeryContainerEl.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      instance.close();
+    }
+  });
+}
+
+galeryContainerEl.insertAdjacentHTML("beforeend", makeGalery);
+galeryContainerEl.addEventListener("click", onGaleryItemClick);
