@@ -25,8 +25,12 @@ function makeGaleryList(array) {
 
 function onGaleryItemClick(event) {
   event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+
   const instance = basicLightbox.create(`
-      <img src=${event.target.dataset.source} width="800" height="600">
+      <img src=${event.target.dataset.source} width="800" height="600" alt=${event.target.alt}>
   `);
 
   instance.show();

@@ -21,10 +21,8 @@ function makeGaleryList(array) {
 }
 
 galeryListEl.insertAdjacentHTML("beforeend", makeGalery);
-galeryListEl.addEventListener("click", (event) => {
-  event.preventDefault();
-  let lightbox = new SimpleLightbox(".gallery a", {
-    captionsData: `alt`,
-    captionDelay: 250,
-  });
+
+let lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: `alt`,
+  captionDelay: 250,
 });
